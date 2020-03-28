@@ -1,4 +1,4 @@
-name: 'Create a Release'
+name: 'NodeJS Create Release'
 description: 'Creates a release if not already created'
 author: 'Gregor Anders <gregor.ander@gmail.com>'
 inputs:
@@ -33,3 +33,6 @@ outputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+branding:
+  icon: 'package'
+  color: 'red'
