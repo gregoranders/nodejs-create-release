@@ -1,0 +1,35 @@
+name: 'Create a Release'
+description: 'Creates a release if not already created'
+author: 'Gregor Anders <gregor.ander@gmail.com>'
+inputs:
+  tag:
+    description: 'Tag name'
+    required: true
+  name:
+    description: 'Release name'
+    required: false
+  body:
+    description: 'Release description'
+    required: false
+  draft:
+    description: '`true` for a draft. `false` to publish. Default: `false`'
+    required: false
+    default: true
+  prerelease:
+    description: '`true` for a prerelease. `false` for a full release. Default: `false`'
+    required: false
+    default: false
+  target:
+    description: 'Release target (branch name or commit id)'
+    required: false
+    default: 'master'
+outputs:
+  id:
+    description: 'Release Id'
+  url:
+    description: 'Release Url'
+  upload_url:
+    description: 'Release Upload Url'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
