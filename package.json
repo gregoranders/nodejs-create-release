@@ -1,10 +1,10 @@
 {
   "name": "nodejs-create-release",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NodeJS Create Release",
   "main": "./dist/index.js",
   "scripts": {
-    "clear": "rimraf ./node_modules ./dist ./coverage ./package-lock.json ./webpack.conf.js",
+    "clear": "rimraf ./node_modules ./dist ./coverage ./package-lock.json",
     "prestart": "npm run build",
     "start": "node ./dist/index.js",
     "prebuild": "tslint --project ./",

@@ -2,7 +2,7 @@ import { clearTestEnvironment, createReleaseMock, listReleasesMock, setInput, se
 
 import { run as testSubject } from "./action";
 
-describe("create-release", () => {
+describe("nodejs-create-release", () => {
 
   beforeEach(() => {
     clearTestEnvironment();
