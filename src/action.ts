@@ -38,6 +38,20 @@ const createRelease = async (client: GitHub, params: ReposCreateReleaseParams) =
   return response.data;
 };
 
+const prepareParams = (body: string, draft: boolean, name: string, prerelease: boolean,
+  tag: string, target: string): ReposCreateReleaseParams => {
+  return {
+    body,
+    draft,
+    name,
+    owner: context.repo.owner,
+    prerelease,
+    repo: context.repo.repo,
+    tag_name: tag,
+    target_commitish: target,
+  };
+};
+
 export const run = async () => {
   const tag = core.getInput("tag", { required: true });
   const name = core.getInput("name", { required: false }) || `${tag} Release`;
@@ -56,16 +70,7 @@ export const run = async () => {
     let release = await findRelease(github, context, tag);
 
     if (!release) {
-      release = await createRelease(github, {
-        body,
-        draft,
-        name,
-        owner: context.repo.owner,
-        prerelease,
-        repo: context.repo.repo,
-        tag_name: tag,
-        target_commitish: target,
-      });
+      release = await createRelease(github, prepareParams(body, draft, name, prerelease, tag, target));
     }
 
     core.setOutput("id", release.id.toString());
