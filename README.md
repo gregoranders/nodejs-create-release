@@ -1,13 +1,14 @@
-# Create Release
+# NodeJS Create Release
 
-## [GitHub Action](https://github.com/features/actions) written in [TypeScript](http://www.typescriptlang.org/).
+## [GitHub Action](https://github.com/features/actions) written in [TypeScript](http://www.typescriptlang.org/)
 
-Create a release on GitHub [GitHub Action](https://github.com/features/actions).
+### Create a release on GitHub - [GitHub Action](https://github.com/features/actions)
+
+This action finds or creates a release, so your workflow can access it.
 
 [![Dependency Status][daviddm-image]][daviddm-url]
 [![License][license-image]][license-url]
 [![Issues][issues-image]][issues-url]
-
 
 [![Master Build][master-build-image]][master-url] [![Master Coverage][master-coveralls-image]][master-coveralls-url] [![Master Version][master-version-image]][master-version-url]
 
@@ -17,21 +18,20 @@ Create a release on GitHub [GitHub Action](https://github.com/features/actions).
 
 [![Main Language](https://img.shields.io/github/languages/top/gregoranders/nodejs-create-release)][code-metric-url] [![Languages](https://img.shields.io/github/languages/count/gregoranders/nodejs-create-release)][code-metric-url] [![Code Size](https://img.shields.io/github/languages/code-size/gregoranders/nodejs-create-release)][code-metric-url] [![Repo-Size](https://img.shields.io/github/repo-size/gregoranders/nodejs-create-release)][code-metric-url]
 
-### Usage
+## Usage
 ```YML
     ...
     - name: nodejs project information
       id: projectinfo
-      uses: gregoranders/nodejs-project-info
-    - name: create release action
+      uses: gregoranders/nodejs-project-info@master
+    - name: create release
       id: createrelease
-      uses: gregoranders/nodejs-create-release
+      uses: gregoranders/nodejs-create-release@v0.0.3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PACKAGE_JSON: ${{ steps.projectinfo.outputs.context }}
       with:
         tag: v${{ steps.projectinfo.outputs.version }}
-        name: ${{ steps.projectinfo.outputs.name }} - ${{ steps.projectinfo.outputs.version }}
+        name: ${{ steps.projectinfo.outputs.name }} - ${{ steps.projectinfo.outputs.version }} Release
         target: ${{ github.ref }}
     ...
 ```
@@ -53,9 +53,9 @@ inputs:
   draft:
     description: '`true` for a draft, `false` to publish'
     required: false
-    default: false
+    default: true
   prerelease:
-    description: '`true` for a prerelease, `false` to full release'
+    description: '`true` for a prerelease, `false` for a full release'
     required: false
     default: false
   target:
@@ -70,6 +70,8 @@ outputs:
   upload_url:
     description: 'Release Upload Url'
 ```
+
+## Development
 
 ### Clone repository
 ```SH
