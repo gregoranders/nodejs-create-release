@@ -1,9 +1,9 @@
-import * as core from "@actions/core";
-import { context, GitHub } from "@actions/github";
+import * as core from '@actions/core';
+import { context, GitHub } from '@actions/github';
 
-import { Context } from "@actions/github/lib/context";
+import { Context } from '@actions/github/lib/context';
 
-import Octokit from "@actions/github/node_modules/@octokit/rest";
+import Octokit from '@actions/github/node_modules/@octokit/rest';
 
 type ReposCreateReleaseParams = Octokit.Octokit.ReposCreateReleaseParams;
 
@@ -11,6 +11,7 @@ const listReleases = async (client: GitHub, ctx: Context) => {
   const response = await client.repos.listReleases({
     owner: ctx.repo.owner,
     page: 0,
+    // eslint-disable-next-line @typescript-eslint/camelcase
     per_page: 10,
     repo: ctx.repo.repo,
   });
@@ -38,8 +39,14 @@ const createRelease = async (client: GitHub, params: ReposCreateReleaseParams) =
   return response.data;
 };
 
-const prepareParams = (body: string, draft: boolean, name: string, prerelease: boolean,
-  tag: string, target: string): ReposCreateReleaseParams => {
+const prepareParams = (
+  body: string,
+  draft: boolean,
+  name: string,
+  prerelease: boolean,
+  tag: string,
+  target: string,
+): ReposCreateReleaseParams => {
   return {
     body,
     draft,
@@ -47,22 +54,24 @@ const prepareParams = (body: string, draft: boolean, name: string, prerelease: b
     owner: context.repo.owner,
     prerelease,
     repo: context.repo.repo,
+    // eslint-disable-next-line @typescript-eslint/camelcase
     tag_name: tag,
+    // eslint-disable-next-line @typescript-eslint/camelcase
     target_commitish: target,
   };
 };
 
 export const run = async () => {
-  const tag = core.getInput("tag", { required: true });
-  const name = core.getInput("name", { required: false }) || `${tag} Release`;
-  const body = core.getInput("body", { required: false }) || name;
-  const draft = core.getInput("draft", { required: false }) === "true";
-  const prerelease = core.getInput("prerelease", { required: false }) === "true";
-  const target = core.getInput("target", { required: false }) || "master";
+  const tag = core.getInput('tag', { required: true });
+  const name = core.getInput('name', { required: false }) || `${tag} Release`;
+  const body = core.getInput('body', { required: false }) || name;
+  const draft = core.getInput('draft', { required: false }) === 'true';
+  const prerelease = core.getInput('prerelease', { required: false }) === 'true';
+  const target = core.getInput('target', { required: false }) || 'master';
 
   try {
     if (!process.env.GITHUB_TOKEN) {
-      throw Error("Missing GITHUB_TOKEN");
+      throw Error('Missing GITHUB_TOKEN');
     }
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
@@ -73,9 +82,9 @@ export const run = async () => {
       release = await createRelease(github, prepareParams(body, draft, name, prerelease, tag, target));
     }
 
-    core.setOutput("id", release.id.toString());
-    core.setOutput("url", release.url);
-    core.setOutput("upload_url", release.upload_url);
+    core.setOutput('id', release.id.toString());
+    core.setOutput('url', release.url);
+    core.setOutput('upload_url', release.upload_url);
   } catch (error) {
     core.setFailed(error);
   }
