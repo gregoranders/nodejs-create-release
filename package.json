@@ -1,6 +1,6 @@
 {
   "name": "nodejs-create-release",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "NodeJS Create Release",
   "main": "./dist/index.js",
   "scripts": {
