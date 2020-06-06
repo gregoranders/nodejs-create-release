@@ -40,7 +40,7 @@ export const createReleaseMock = jest.fn();
 
 const githubMock = jest.mock('@actions/github', () => {
   return {
-    GitHub: jest.fn().mockImplementation(() => {
+    getOctokit: jest.fn().mockImplementation(() => {
       return {
         repos: {
           createRelease: createReleaseMock,

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { clearTestEnvironment, createReleaseMock, listReleasesMock, setInput, setOutputMock } from './testUtils';
 
 import { run as testSubject } from './action';
@@ -79,6 +78,32 @@ describe('nodejs-create-release', () => {
       expect(setOutputMock).toHaveCoreOutput('id', '2');
       expect(setOutputMock).toHaveCoreOutput('url', 'url2');
       expect(setOutputMock).toHaveCoreOutput('upload_url', 'upload_url2');
+    });
+  });
+
+  it('valid tag and GITHUB_TOKEN - create failed', async () => {
+    setInput('tag', 'v0.0.1');
+    process.env.GITHUB_TOKEN = 'abcd';
+    listReleasesMock.mockReturnValue({ data: [] });
+    createReleaseMock.mockReturnValue(undefined);
+    return testSubject().then(() => {
+      expect(listReleasesMock).toHaveBeenNthCalledWith(1, {
+        owner: 'owner',
+        page: 0,
+        per_page: 10,
+        repo: 'repo',
+      });
+      expect(createReleaseMock).toHaveBeenNthCalledWith(1, {
+        body: 'v0.0.1 Release',
+        draft: false,
+        name: 'v0.0.1 Release',
+        owner: 'owner',
+        prerelease: false,
+        repo: 'repo',
+        tag_name: 'v0.0.1',
+        target_commitish: 'master',
+      });
+      expect(setOutputMock).toHaveBeenCalledTimes(0);
     });
   });
 });
