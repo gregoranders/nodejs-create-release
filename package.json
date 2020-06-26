@@ -29,7 +29,7 @@
   "jest": {
     "collectCoverage": true,
     "coveragePathIgnorePatterns": [
-      "testUtils.ts",
+      "test-utils.ts",
       "/node_modules/"
     ],
     "coverageReporters": [
@@ -73,7 +73,9 @@
     "@zeit/ncc": "0.22.3",
     "eslint": "7.3.1",
     "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-jest": "23.17.1",
     "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-unicorn": "20.1.0",
     "husky": "4.2.5",
     "jest": "26.1.0",
     "prettier": "2.0.5",
