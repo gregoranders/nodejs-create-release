@@ -1,6 +1,6 @@
 {
   "name": "nodejs-create-release",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "NodeJS Create Release",
   "main": "./dist/index.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "build": "ncc build ./src/index.ts -m -o ./dist/",
     "pretest": "rimraf ./coverage",
     "test": "jest",
-    "watch": "tsc -w --project ./"
+    "watch": "tsc -w --project ./",
+    "prepare": "tsc --noEmit --project ./ && eslint ./src/**/*.ts --quiet && npm test"
   },
   "repository": {
     "type": "git",
@@ -23,13 +24,19 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "tsc --noEmit --project ./ && eslint ./src/**/*.ts --quiet && npm run test"
+      "pre-commit": "lint-staged && npm run prepare",
+      "pre-push": "npm run test"
     }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --ext .ts ./src"
+    ]
   },
   "jest": {
     "collectCoverage": true,
     "coveragePathIgnorePatterns": [
-      "testUtils.ts",
+      "test-utils.ts",
       "/node_modules/"
     ],
     "coverageReporters": [
@@ -66,19 +73,23 @@
     "@actions/github": "3.0.0"
   },
   "devDependencies": {
-    "@octokit/rest": "17.10.0",
-    "@types/jest": "25.2.3",
-    "@typescript-eslint/eslint-plugin": "3.1.0",
-    "@typescript-eslint/parser": "3.1.0",
+    "@octokit/rest": "18.0.0",
+    "@types/jest": "26.0.3",
+    "@typescript-eslint/eslint-plugin": "3.4.0",
+    "@typescript-eslint/parser": "3.4.0",
     "@zeit/ncc": "0.22.3",
-    "eslint": "7.2.0",
+    "eslint": "7.3.1",
     "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-prettier": "3.1.3",
+    "eslint-plugin-jest": "23.17.1",
+    "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-unicorn": "20.1.0",
+    "generate-changelog": "1.8.0",
     "husky": "4.2.5",
-    "jest": "26.0.1",
+    "jest": "26.1.0",
+    "lint-staged": "^10.2.11",
     "prettier": "2.0.5",
     "rimraf": "3.0.2",
-    "ts-jest": "26.1.0",
+    "ts-jest": "26.1.1",
     "ts-node": "8.10.2",
     "typescript": "3.9.5"
   }
