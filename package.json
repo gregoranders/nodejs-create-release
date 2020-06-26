@@ -11,7 +11,8 @@
     "build": "ncc build ./src/index.ts -m -o ./dist/",
     "pretest": "rimraf ./coverage",
     "test": "jest",
-    "watch": "tsc -w --project ./"
+    "watch": "tsc -w --project ./",
+    "prepare": "tsc --noEmit --project ./ && eslint ./src/**/*.ts --quiet && npm test"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,14 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "tsc --noEmit --project ./ && eslint ./src/**/*.ts --quiet && npm run test"
+      "pre-commit": "lint-staged && npm run prepare",
+      "pre-push": "npm run test"
     }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --ext .ts ./src"
+    ]
   },
   "jest": {
     "collectCoverage": true,
@@ -79,6 +86,7 @@
     "generate-changelog": "1.8.0",
     "husky": "4.2.5",
     "jest": "26.1.0",
+    "lint-staged": "^10.2.11",
     "prettier": "2.0.5",
     "rimraf": "3.0.2",
     "ts-jest": "26.1.1",
