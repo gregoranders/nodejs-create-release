@@ -70,7 +70,7 @@
   "homepage": "https://gregoranders.github.io/nodejs-create-release/",
   "dependencies": {
     "@actions/core": "1.2.4",
-    "@actions/github": "3.0.0"
+    "@actions/github": "4.0.0"
   },
   "devDependencies": {
     "@octokit/rest": "18.0.0",
