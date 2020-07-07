@@ -75,7 +75,7 @@
   "devDependencies": {
     "@octokit/rest": "18.0.0",
     "@types/jest": "26.0.3",
-    "@typescript-eslint/eslint-plugin": "3.5.0",
+    "@typescript-eslint/eslint-plugin": "3.6.0",
     "@typescript-eslint/parser": "3.5.0",
     "@zeit/ncc": "0.22.3",
     "eslint": "7.4.0",
