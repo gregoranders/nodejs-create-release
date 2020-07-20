@@ -1,4 +1,10 @@
-import { clearTestEnvironment, createReleaseMock, listReleasesMock, setInput, setOutputMock } from './test-utils';
+import {
+  clearTestEnvironment,
+  createReleaseMock,
+  listReleasesMock,
+  setInput,
+  setOutputMock,
+} from './fixtures/test-utils';
 
 import { run as testSubject } from './action';
 
