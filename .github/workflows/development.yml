@@ -5,54 +5,59 @@ on:
     branches:
       - development
 
+env:
+  CI: true
+  GITHUB_BRANCH: ${{ github.ref }}
+  GITHUB_HEAD_REF: ${{ github.head_ref }}
+  GITHUB_BASE_REF: ${{ github.base_ref }}
+  GITHUB_COMMIT: ${{ github.sha }}
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        node-version: [14.x]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - name: nodejs project info
         id: projectinfo
-        uses: gregoranders/nodejs-project-info@master
-        env:
-          CI: true
+        uses: gregoranders/nodejs-create-release@master
       - name: npm install
         run: |
           npm install
-        env:
-          CI: true
       - name: npm run build
         run: |
           npm run build
-        env:
-          CI: true
       - name: npm test
         run: |
           npm test
-        env:
-          CI: true
       - name: code coverage
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./coverage/lcov.info
-        env:
-          CI: true
+          path-to-lcov: ./test/coverage/lcov.info
       - name: publish code coverage to code climate
         if: matrix.os == 'ubuntu-latest'
-        uses: paambaati/codeclimate-action@v2.3.0
+        uses: paambaati/codeclimate-action@v2.6.0
         env:
-          CI: true
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: npm run test
-          debug: true
+          coverageLocations: |
+            ./test/coverage/lcov.info:lcov
+      - name: run codacy-coverage-reporter
+        if: matrix.os == 'ubuntu-latest'
+        uses: codacy/codacy-coverage-reporter-action@master
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: ./test/coverage/lcov.info
