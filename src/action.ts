@@ -22,11 +22,13 @@ const findRelease = async (client: GitHub, context_: Context, tag: string) => {
   const found = releases.reverse().find((release) => release.tag_name === tag);
   if (found) {
     core.info(`Found ${tag} release [id: ${found.id}]`);
+    core.endGroup();
+    return { id: found.id.toString(), url: found.url, upload_url: found.upload_url };
   } else {
     core.info(`Release ${tag} not found`);
+    core.endGroup();
+    return;
   }
-  core.endGroup();
-  return found;
 };
 
 const createRelease = async (client: GitHub, parameters: ReposCreateReleaseParams) => {
@@ -35,7 +37,7 @@ const createRelease = async (client: GitHub, parameters: ReposCreateReleaseParam
   if (response) {
     core.info(`Release ${response.data.tag_name} created [id: ${response.data.id}]`);
     core.endGroup();
-    return response.data;
+    return { id: response.data.id.toString(), url: response.data.url, upload_url: response.data.upload_url };
   } else {
     core.info(`Unable to create release ${parameters.tag_name}`);
     core.endGroup();
@@ -63,6 +65,7 @@ const prepareParameters = (
   };
 };
 
+/*eslint complexity: ["error", 8]*/
 export const run = async (): Promise<void> => {
   const tag = core.getInput('tag', { required: true });
   const name = core.getInput('name', { required: false }) || `${tag} Release`;
@@ -78,22 +81,18 @@ export const run = async (): Promise<void> => {
 
     const octokit = getOctokit(process.env.GITHUB_TOKEN);
 
-    const release = await findRelease(octokit, context, tag);
+    let release = await findRelease(octokit, context, tag);
 
-    if (release) {
-      core.setOutput('id', release.id.toString());
-      core.setOutput('url', release.url);
-      core.setOutput('upload_url', release.upload_url);
-    } else {
-      const newRelease = await createRelease(octokit, prepareParameters(body, draft, name, prerelease, tag, target));
-      if (newRelease) {
-        core.setOutput('id', newRelease.id.toString());
-        core.setOutput('url', newRelease.url);
-        core.setOutput('upload_url', newRelease.upload_url);
-      } else {
+    if (!release) {
+      release = await createRelease(octokit, prepareParameters(body, draft, name, prerelease, tag, target));
+      if (!release) {
         throw new Error('Unable to create release');
       }
     }
+
+    core.setOutput('id', release.id.toString());
+    core.setOutput('url', release.url);
+    core.setOutput('upload_url', release.upload_url);
   } catch (error) {
     core.setFailed(error);
   }
