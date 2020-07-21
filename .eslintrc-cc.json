@@ -11,7 +11,9 @@
     "browser": true,
     "es2020": true
   },
-  "rules": {},
+  "rules": {
+    "complexity": ["error", 8]
+  },
   "settings": {},
   "globals": {}
 }

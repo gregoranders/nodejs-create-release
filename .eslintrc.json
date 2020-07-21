@@ -21,6 +21,7 @@
     "jest": true
   },
   "rules": {
+    "complexity": ["error", 8],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "sort-imports": [
       "error",
