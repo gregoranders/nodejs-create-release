@@ -31,7 +31,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: nodejs project info
         id: projectinfo
-        uses: gregoranders/nodejs-create-release@master
+        uses: gregoranders/nodejs-project-info@master
       - name: npm install
         run: |
           npm install
