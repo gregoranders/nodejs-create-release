@@ -1,6 +1,6 @@
 {
   "name": "nodejs-create-release",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "NodeJS Create Release",
   "main": "./dist/index.js",
   "scripts": {
@@ -94,14 +94,14 @@
     "@actions/github": "4.0.0"
   },
   "devDependencies": {
-    "@octokit/rest": "18.0.1",
-    "@types/jest": "26.0.5",
+    "@octokit/rest": "18.0.3",
+    "@types/jest": "26.0.7",
     "@typescript-eslint/eslint-plugin": "3.7.0",
     "@typescript-eslint/parser": "3.7.0",
     "@zeit/ncc": "0.22.3",
     "eslint": "7.5.0",
     "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-jest": "23.18.0",
+    "eslint-plugin-jest": "23.18.1",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-unicorn": "21.0.0",
     "generate-changelog": "1.8.0",
