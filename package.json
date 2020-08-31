@@ -90,7 +90,7 @@
   },
   "homepage": "https://gregoranders.github.io/nodejs-create-release/",
   "dependencies": {
-    "@actions/core": "1.2.4",
+    "@actions/core": "1.2.5",
     "@actions/github": "4.0.0"
   },
   "devDependencies": {
