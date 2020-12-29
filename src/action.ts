@@ -4,7 +4,7 @@ import { RestEndpointMethodTypes } from '@octokit/plugin-rest-endpoint-methods/d
 
 type Context = typeof context;
 type GitHub = ReturnType<typeof getOctokit>;
-type ReposCreateReleaseParams = RestEndpointMethodTypes['repos']['createRelease']['parameters'];
+type ReposCreateReleaseParameters = RestEndpointMethodTypes['repos']['createRelease']['parameters'];
 
 const listReleases = async (client: GitHub, context_: Context) => {
   const response = await client.repos.listReleases({
@@ -31,7 +31,7 @@ const findRelease = async (client: GitHub, context_: Context, tag: string) => {
   }
 };
 
-const createRelease = async (client: GitHub, parameters: ReposCreateReleaseParams) => {
+const createRelease = async (client: GitHub, parameters: ReposCreateReleaseParameters) => {
   core.startGroup(`Creating ${parameters.tag_name} release`);
   const response = await client.repos.createRelease(parameters);
   if (response) {
