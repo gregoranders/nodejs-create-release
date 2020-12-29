@@ -22,7 +22,7 @@ const actionsCoreMock = jest.mock('@actions/core', () => {
       if (
         options &&
         options.required &&
-        !Object.keys(process.env).find((key) => `INPUT_${name.toUpperCase()}` === key)
+        !Object.keys(process.env).some((key) => `INPUT_${name.toUpperCase()}` === key)
       ) {
         throw new Error(`Input required and not supplied: ${name}`);
       }
@@ -57,18 +57,18 @@ const githubMock = jest.mock('@actions/github', () => {
   };
 });
 
-const inputVars: { [key: string]: string } = {};
+const inputVariables: { [key: string]: string } = {};
 
 export const setInput = (name: string, value: string) => {
-  const varName = `INPUT_${name.toUpperCase()}`;
-  inputVars[varName] = value;
-  process.env[varName] = value;
+  const variableName = `INPUT_${name.toUpperCase()}`;
+  inputVariables[variableName] = value;
+  process.env[variableName] = value;
 };
 
 export const clearTestEnvironment = () => {
-  Object.keys(inputVars).forEach((varName) => {
-    Reflect.deleteProperty(process.env, varName);
-    Reflect.deleteProperty(inputVars, varName);
+  Object.keys(inputVariables).forEach((variableName) => {
+    Reflect.deleteProperty(process.env, variableName);
+    Reflect.deleteProperty(inputVariables, variableName);
   });
   actionsCoreMock.clearAllMocks();
   githubMock.clearAllMocks();
@@ -102,7 +102,7 @@ expect.extend({
   toHaveCoreOutput: (recieved: jest.Mock, key: string, value: string) => {
     return {
       message: () => `No output for "${key} with ${value} found`,
-      pass: recieved.mock.calls.find((call) => call[0] === key && call[1] === value) ? true : false,
+      pass: recieved.mock.calls.some((call) => call[0] === key && call[1] === value) ? true : false,
     };
   },
 });
