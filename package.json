@@ -24,12 +24,6 @@
     "jest",
     "typescript"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm run prepare",
-      "pre-push": "npm run test"
-    }
-  },
   "lint-staged": {
     "*.ts": [
       "eslint --ext .ts ./src"
@@ -94,6 +88,8 @@
     "@actions/github": "4.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "16.1.0",
+    "@commitlint/config-conventional": "16.0.0",
     "@octokit/rest": "18.0.12",
     "@types/jest": "26.0.19",
     "@typescript-eslint/eslint-plugin": "4.11.1",
@@ -105,13 +101,13 @@
     "eslint-plugin-prettier": "3.3.0",
     "eslint-plugin-unicorn": "25.0.0",
     "generate-changelog": "1.8.0",
-    "husky": "4.3.6",
+    "husky": "7.0.4",
     "jest": "26.6.3",
     "jest-cli": "26.6.3",
     "jest-html-reporter": "3.3.0",
     "jest-junit": "12.0.0",
     "jest-spec-reporter": "1.0.14",
-    "lint-staged": "^10.5.3",
+    "lint-staged": "12.3.3",
     "prettier": "2.2.1",
     "rimraf": "3.0.2",
     "ts-jest": "26.4.4",
