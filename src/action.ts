@@ -1,5 +1,7 @@
 import * as core from '@actions/core';
+// eslint-disable-next-line prettier/prettier
 import { context, getOctokit } from '@actions/github';
+// eslint-disable-next-line prettier/prettier
 import { RestEndpointMethodTypes } from '@octokit/plugin-rest-endpoint-methods/dist-types';
 
 type Context = typeof context;
@@ -93,7 +95,7 @@ export const run = async (): Promise<void> => {
     core.setOutput('id', release.id.toString());
     core.setOutput('url', release.url);
     core.setOutput('upload_url', release.upload_url);
-  } catch (error) {
+  } catch (error: Error | any) {
     core.setFailed(error);
   }
 };
