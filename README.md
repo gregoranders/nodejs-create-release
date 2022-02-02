@@ -27,7 +27,7 @@ This action finds or creates a release, so your workflow can access it.
       uses: gregoranders/nodejs-project-info@v0.0.13
     - name: create release
       id: createrelease
-      uses: gregoranders/nodejs-create-release@v0.0.13
+      uses: gregoranders/nodejs-create-release@v0.0.14
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
