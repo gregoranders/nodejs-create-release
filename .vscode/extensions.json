@@ -1,6 +1,7 @@
 {
   "recommendations": [
-    "coenraads.bracket-pair-colorizer",
+    "davidanson.vscode-markdownlint",
+    "vivaxy.vscode-conventional-commits",
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
     "orta.vscode-jest",

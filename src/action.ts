@@ -1,10 +1,12 @@
 import * as core from '@actions/core';
+// eslint-disable-next-line prettier/prettier
 import { context, getOctokit } from '@actions/github';
+// eslint-disable-next-line prettier/prettier
 import { RestEndpointMethodTypes } from '@octokit/plugin-rest-endpoint-methods/dist-types';
 
 type Context = typeof context;
 type GitHub = ReturnType<typeof getOctokit>;
-type ReposCreateReleaseParams = RestEndpointMethodTypes['repos']['createRelease']['parameters'];
+type ReposCreateReleaseParameters = RestEndpointMethodTypes['repos']['createRelease']['parameters'];
 
 const listReleases = async (client: GitHub, context_: Context) => {
   const response = await client.repos.listReleases({
@@ -31,7 +33,7 @@ const findRelease = async (client: GitHub, context_: Context, tag: string) => {
   }
 };
 
-const createRelease = async (client: GitHub, parameters: ReposCreateReleaseParams) => {
+const createRelease = async (client: GitHub, parameters: ReposCreateReleaseParameters) => {
   core.startGroup(`Creating ${parameters.tag_name} release`);
   const response = await client.repos.createRelease(parameters);
   if (response) {
@@ -93,7 +95,7 @@ export const run = async (): Promise<void> => {
     core.setOutput('id', release.id.toString());
     core.setOutput('url', release.url);
     core.setOutput('upload_url', release.upload_url);
-  } catch (error) {
+  } catch (error: Error | any) {
     core.setFailed(error);
   }
 };
