@@ -91,7 +91,6 @@
     "@commitlint/cli": "16.1.0",
     "@commitlint/config-conventional": "16.0.0",
     "@octokit/rest": "18.0.12",
-    "@types/jest": "27.4.0",
     "@typescript-eslint/eslint-plugin": "4.11.1",
     "@typescript-eslint/parser": "4.11.1",
     "@vercel/ncc": "0.33.1",
