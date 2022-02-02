@@ -1,6 +1,6 @@
 {
   "name": "nodejs-create-release",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "NodeJS Create Release",
   "main": "./dist/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "test": "jest",
     "watch": "tsc -w --project ./",
     "prepare": "husky install",
-    "codeclimate": "docker run --interactive --tty --rm --env CODECLIMATE_CODE=\"$PWD\" --volume \"$PWD\":/code --volume /var/run/docker.sock:/var/run/docker.sock --volume /tmp/cc:/tmp/cc codeclimate/codeclimate analyze",
+    "codeclimate": "docker run --interactive --rm --env CODECLIMATE_CODE=\"$PWD\" --volume \"$PWD\":/code --volume /var/run/docker.sock:/var/run/docker.sock --volume /tmp/cc:/tmp/cc codeclimate/codeclimate analyze",
     "changelog": "changelog"
   },
   "repository": {
@@ -85,7 +85,7 @@
   "homepage": "https://gregoranders.github.io/nodejs-create-release/",
   "dependencies": {
     "@actions/core": "1.6.0",
-    "@actions/github": "4.0.0"
+    "@actions/github": "5.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "16.1.0",
