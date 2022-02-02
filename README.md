@@ -6,7 +6,6 @@
 
 This action finds or creates a release, so your workflow can access it.
 
-[![Dependency Status][daviddm-image]][daviddm-url]
 [![License][license-image]][license-url]
 [![Issues][issues-image]][issues-url]
 
@@ -25,10 +24,10 @@ This action finds or creates a release, so your workflow can access it.
     ...
     - name: nodejs project information
       id: projectinfo
-      uses: gregoranders/nodejs-project-info@v0.0.12
+      uses: gregoranders/nodejs-project-info@v0.0.13
     - name: create release
       id: createrelease
-      uses: gregoranders/nodejs-create-release@v0.0.12
+      uses: gregoranders/nodejs-create-release@v0.0.13
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -38,7 +37,7 @@ This action finds or creates a release, so your workflow can access it.
     ...
 ```
 
-#### Inputs/Outputs
+### Inputs/Outputs
 
 ```YML
 inputs:
@@ -81,8 +80,6 @@ outputs:
 [code-metric-url]: https://github.com/gregoranders/nodejs-create-release/search?l=TypeScript
 [travis-url]: https://travis-ci.org/gregoranders/nodejs-create-release
 [travis-image]: https://travis-ci.org/gregoranders/nodejs-create-release.svg?branch=master
-[daviddm-url]: https://david-dm.org/gregoranders/nodejs-create-release
-[daviddm-image]: https://david-dm.org/gregoranders/nodejs-create-release.svg?branch=master
 [license-url]: https://github.com/gregoranders/nodejs-create-release/blob/master/LICENSE
 [license-image]: https://img.shields.io/github/license/gregoranders/nodejs-create-release.svg
 [master-version-url]: https://github.com/gregoranders/nodejs-create-release/blob/master/package.json
