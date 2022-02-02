@@ -9,7 +9,7 @@ type GitHub = ReturnType<typeof getOctokit>;
 type ReposCreateReleaseParameters = RestEndpointMethodTypes['repos']['createRelease']['parameters'];
 
 const listReleases = async (client: GitHub, context_: Context) => {
-  const response = await client.repos.listReleases({
+  const response = await client.rest.repos.listReleases({
     owner: context_.repo.owner,
     page: 0,
     per_page: 10,
@@ -35,7 +35,7 @@ const findRelease = async (client: GitHub, context_: Context, tag: string) => {
 
 const createRelease = async (client: GitHub, parameters: ReposCreateReleaseParameters) => {
   core.startGroup(`Creating ${parameters.tag_name} release`);
-  const response = await client.repos.createRelease(parameters);
+  const response = await client.rest.repos.createRelease(parameters);
   if (response) {
     core.info(`Release ${response.data.tag_name} created [id: ${response.data.id}]`);
     core.endGroup();

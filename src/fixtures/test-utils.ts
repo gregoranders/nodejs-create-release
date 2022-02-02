@@ -38,9 +38,11 @@ const githubMock = jest.mock('@actions/github', () => {
   return {
     getOctokit: jest.fn().mockImplementation(() => {
       return {
-        repos: {
-          createRelease: createReleaseMock,
-          listReleases: listReleasesMock,
+        rest: {
+          repos: {
+            createRelease: createReleaseMock,
+            listReleases: listReleasesMock,
+          },
         },
       };
     }),
