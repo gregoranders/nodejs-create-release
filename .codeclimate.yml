@@ -12,6 +12,10 @@ plugins:
     enabled: true
   git-legal:
     enabled: true
+checks:
+  method-complexity:
+    config:
+      threshold: 8
 exclude_patterns:
   - '**/.github'
   - '**/.circleci'
