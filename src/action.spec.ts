@@ -44,6 +44,7 @@ describe('nodejs-create-release', () => {
         repo: 'repo',
         tag_name: 'v0.0.1',
         target_commitish: 'master',
+        generate_release_notes: true,
       });
       expect(testUtils.setOutputMock).toHaveBeenCalledTimes(3);
       expect(testUtils.setOutputMock).toHaveCoreOutput('id', '1');
