@@ -1,6 +1,6 @@
 {
   "name": "nodejs-create-release",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "NodeJS Create Release",
   "main": "./dist/index.js",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/gregoranders"
   },
   "keywords": [
     "github",
