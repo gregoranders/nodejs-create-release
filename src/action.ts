@@ -64,6 +64,7 @@ const prepareParameters = (
     repo: context.repo.repo,
     tag_name: tag,
     target_commitish: target,
+    generate_release_notes: true,
   };
 };
 
