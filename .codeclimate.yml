@@ -33,3 +33,5 @@ exclude_patterns:
   - '**/dist'
   - '**/test'
   - '**/node_modules'
+  - '**/commitlint.config.js'
+  - '**/**/*.spec.ts'
