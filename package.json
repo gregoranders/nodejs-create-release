@@ -131,7 +131,7 @@
     "remark-lint-heading-whitespace": "1.0.0",
     "remark-lint-list-item-indent": "3.1.1",
     "remark-lint-no-dead-urls": "1.1.0",
-    "remark-lint-no-duplicate-headings": "3.1.1",
+    "remark-lint-no-duplicate-headings": "3.1.2",
     "remark-lint-write-good": "1.2.0",
     "remark-preset-lint-consistent": "5.1.1",
     "remark-preset-lint-markdown-style-guide": "5.1.2",
